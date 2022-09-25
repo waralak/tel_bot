@@ -1,5 +1,5 @@
-from telegram import Update, ForceReply
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ApplicationBuilder
+from telegram import Update
+from telegram.ext import CommandHandler, CallbackContext, ApplicationBuilder
 
 import os
 
