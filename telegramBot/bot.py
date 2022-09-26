@@ -1,18 +1,8 @@
-from telegram import Update
-from telegram.ext import CommandHandler, CallbackContext, ApplicationBuilder
-
+import telegram
 import os
 
-async def start(update: Update, context: CallbackContext):
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id, 
-        text="I am a bot! Hi!"
-    )
+TOKEN = os.environ.get("TOKEN", "")
+bot = telegram.Bot(token=TOKEN)
 
-application = ApplicationBuilder().token(os.getenv("TOKEN")).build()
-start_handler = CommandHandler('start', start)
-
-application.add_handler(start_handler)
-application.run_polling()
-
+bot.set_webhook(url="https://telboting.herokuapp.com/{}".format(TOKEN))
 
