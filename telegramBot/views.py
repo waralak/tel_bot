@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import telegram
 import os
 
-bot = telegram.Bot(token=os.environ.get("TOKEN", "")
+bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
 
 def index(request):
     update = telegram.Update.de_json(request.POST, bot)
