@@ -17,6 +17,6 @@ def index(request):
     msg_id = update.message.message_id
 
     print("Message Successfully Received from {}.{}".format(chat_id, msg_id))
-
-
+    bot_welcome = "HIIIIII"
+    bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
     return HttpResponse("")
