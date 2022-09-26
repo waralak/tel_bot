@@ -9,8 +9,8 @@ bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
 
 def index(request):
     if request.method == "GET":
-        print("YES, it is GETTTTT")
-        sys.stdout.flush()
+        return HttpResponse("")
+    
     update = telegram.Update.de_json(request.POST, bot)
     
     chat_id = update.message.chat.id
