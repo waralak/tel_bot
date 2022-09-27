@@ -15,10 +15,9 @@ def index(request):
     if request.method == "GET":
         return HttpResponse("")
     
-    logger.info('\n{}\n'.format(request.read()))
     try:
-        js = json.loads(request.read().decode())
-
+        js = request.read().decode()
+        logger.info('\n{}\n'.format(js))
         logger.info("Successfully turned into json object")
         
         update = telegram.Update.de_json(js, bot)
