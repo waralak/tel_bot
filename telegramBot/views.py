@@ -20,6 +20,7 @@ def index(request):
         logger.info('\n{}\n'.format(js))
         logger.info("Successfully turned into json object")
         
+        js = json.loads(js)
         update = telegram.Update.de_json(js, bot)
         chat_id = update.message.chat.id
         msg_id = update.message.message_id
