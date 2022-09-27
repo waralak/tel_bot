@@ -1,9 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 import telegram
 import os
-import sys
 from django.views.decorators.csrf import csrf_exempt
 
 bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
@@ -18,11 +16,6 @@ def index(request):
         update = telegram.Update.de_json(request.POST, bot)
     except:
         return HttpResponse("1111\n")
-
-    try:
-        chat_id = update.message.chat.id
-    except:
-        return HttpResponse("2222\n")
 
     try:
         msg_id = update.message.message_id
