@@ -17,10 +17,20 @@ def index(request):
     if request.method == "POST":
         return HttpResponse("POSted")
     
-    update = telegram.Update.de_json(request.POST, bot)
-    
-    chat_id = update.message.chat.id
-    msg_id = update.message.message_id
+    try:
+        update = telegram.Update.de_json(request.POST, bot)
+    except:
+        return HttpResponse("1111\n")
+
+    try:
+        chat_id = update.message.chat.id
+    except:
+        return HttpResponse("2222\n")
+
+    try:
+        msg_id = update.message.message_id
+    except:
+        return HttpResponse("3333\n")
 
     print("Message Successfully Received from {}.{}".format(chat_id, msg_id))
     bot_welcome = "HIIIIII"
