@@ -19,25 +19,11 @@ def index(request):
 
     js = json.loads(request.read())
     
-    try:
-        update = telegram.Update.de_json(js, bot)
-    except Exception as e:
-        logger.info('\n{}\n'.format(e))
-        return HttpResponse("1111 {}\n".format(e))
+    update = telegram.Update.de_json(js, bot)
+    chat_id = update.message.chat.id
+    msg_id = update.message.message_id
 
-    try:
-        chat_id = update.message.chat.id
-    except Exception as e:
-        logger.info('\n{}\n'.format(e))
-        return HttpResponse("2222 {}\n".format(e))
-
-    try:
-        msg_id = update.message.message_id
-    except Exception as e:
-        logger.info('\n{}\n'.format(e))
-        return HttpResponse("{}\n".format(e))
-
-    print("Message Successfully Received from {}.{}".format(chat_id, msg_id))
+    logger.info("Message Successfully Received from {}.{}".format(chat_id, msg_id))
     bot_welcome = "HIIIIII"
     bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
     return HttpResponse("")
