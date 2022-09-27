@@ -14,9 +14,6 @@ def index(request):
     if request.method == "GET":
         return HttpResponse("")
 
-    if request.method == "POST":
-        return HttpResponse("POSted")
-    
     try:
         update = telegram.Update.de_json(request.POST, bot)
     except:
