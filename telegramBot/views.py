@@ -3,6 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 import telegram
 import os
+import logging
 from django.views.decorators.csrf import csrf_exempt
 
 bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
@@ -12,7 +13,10 @@ bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
 def index(request):
     if request.method == "GET":
         return HttpResponse("")
-
+    
+    logger = logging.getLogger('testlogger')
+    logger.info('asdhfoihaoshdoifhaoishdofhoadshfoh \n\n')
+    
     try:
         update = telegram.Update.de_json(request.POST, bot)
     except Exception as e:
