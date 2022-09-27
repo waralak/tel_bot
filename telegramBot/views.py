@@ -4,6 +4,7 @@ from django.http import HttpResponse
 import telegram
 import os
 import logging
+import json
 from django.views.decorators.csrf import csrf_exempt
 
 bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
@@ -15,9 +16,11 @@ def index(request):
         return HttpResponse("")
     
     logger.info('\nLength of the POST request: {}\n'.format(request.read()))
+
+    js = json.loads(request.read())
     
     try:
-        update = telegram.Update.de_json(request.POST, bot)
+        update = telegram.Update.de_json(js, bot)
     except Exception as e:
         logger.info('\n{}\n'.format(e))
         return HttpResponse("1111 {}\n".format(e))
