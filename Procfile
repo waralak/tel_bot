@@ -1,1 +1,1 @@
-web: gunicorn tele_bot.wsgi
+web: gunicorn --log-file - tele_bot.wsgi
