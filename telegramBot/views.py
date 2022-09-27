@@ -14,7 +14,7 @@ def index(request):
     if request.method == "GET":
         return HttpResponse("")
     
-    logger.info('{} \n\n'.format(request.POST))
+    logger.info('{} \n\n'.format(dict(request.POST)))
     
     try:
         update = telegram.Update.de_json(request.POST, bot)
