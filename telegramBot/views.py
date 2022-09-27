@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 import telegram
@@ -14,13 +15,18 @@ def index(request):
 
     try:
         update = telegram.Update.de_json(request.POST, bot)
-    except:
+    except as e:
         return HttpResponse("1111\n")
 
     try:
+        chat_id = update.message.chat.id
+    except as e:
+        return HttpResponse("2222\n")
+
+    try:
         msg_id = update.message.message_id
-    except:
-        return HttpResponse("3333\n")
+    except as e:
+        return HttpResponse("{}\n".format(e))
 
     print("Message Successfully Received from {}.{}".format(chat_id, msg_id))
     bot_welcome = "HIIIIII"
