@@ -15,15 +15,21 @@ def index(request):
     if request.method == "GET":
         return HttpResponse("")
     
-    logger.info('\nLength of the POST request: {}\n'.format(request.read()))
+    logger.info('\n{}\n'.format(request.read()))
 
-    js = json.loads(request.read())
+    js = json.loads(request.read().decode())
+
+    logger.info("Successfully turned into json object")
     
     update = telegram.Update.de_json(js, bot)
     chat_id = update.message.chat.id
     msg_id = update.message.message_id
 
+    logger.info("Successfully turned into telegram object")
+
     logger.info("Message Successfully Received from {}.{}".format(chat_id, msg_id))
     bot_welcome = "HIIIIII"
     bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
+
+    logger.info("Successfully turned into sent object")
     return HttpResponse("")
