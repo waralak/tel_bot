@@ -7,15 +7,14 @@ import logging
 from django.views.decorators.csrf import csrf_exempt
 
 bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
-
+logger = logging.getLogger('testlogger')
 
 @csrf_exempt
 def index(request):
     if request.method == "GET":
         return HttpResponse("")
     
-    logger = logging.getLogger('testlogger')
-    logger.info('asdhfoihaoshdoifhaoishdofhoadshfoh \n\n')
+    logger.info('{} \n\n'.format(request.POST))
     
     try:
         update = telegram.Update.de_json(request.POST, bot)
