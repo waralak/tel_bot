@@ -16,12 +16,12 @@ def index(request):
     try:
         update = telegram.Update.de_json(request.POST, bot)
     except Exception as e:
-        return HttpResponse("1111\n")
+        return HttpResponse("1111 {}\n".format(e))
 
     try:
         chat_id = update.message.chat.id
     except Exception as e:
-        return HttpResponse("2222\n")
+        return HttpResponse("2222 {}\n".format(e))
 
     try:
         msg_id = update.message.message_id
