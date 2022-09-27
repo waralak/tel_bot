@@ -4,9 +4,12 @@ from django.http import HttpResponse
 import telegram
 import os
 import sys
+from django.views.decorators.csrf import csrf_exempt
 
 bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
 
+
+@csrf_exempt
 def index(request):
     if request.method == "GET":
         return HttpResponse("")
