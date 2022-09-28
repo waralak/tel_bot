@@ -56,7 +56,7 @@ def set_webhook(request):
 
         bot.delete_webhook()
         bot.set_webhook(
-            url="https://telboting.herokuapp.com/{}/".format(TOKEN)
+            url="https://telbotingg.herokuapp.com/{}/".format(TOKEN)
         )
 
     except Exception as e:
