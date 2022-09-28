@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 TOKEN = os.environ.get("TOKEN", "")
 bot = telegram.Bot(token=TOKEN)
+PHOTO = "https://c.tenor.com/yheo1GGu3FwAAAAd/rick-roll-rick-ashley.gif"
+
 # For debugging 
 logger = logging.getLogger('testlogger')
 
@@ -24,16 +26,18 @@ def index(request):
         msg_id = update.message.message_id
 
         logger.info("Successfully turned into telegram object")
-
         logger.info("Message Successfully Received from {}.{}".format(chat_id, msg_id))
-        bot_welcome = "HIIIIII"
-        bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
+
+        ##bot_welcome = "HIIIIII"
+        ##bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
+        bot.send_photo(chat_id, PHOTO, caption="LMAOOOO")
 
         logger.info("Successfully turned into sent object")
     except Exception as e:
         logger.info("\n{}\n".format(e))
 
     return HttpResponse("")
+
 
 @csrf_exempt
 def set_webhook(request):
