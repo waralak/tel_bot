@@ -13,6 +13,7 @@ PHOTO = "https://c.tenor.com/yheo1GGu3FwAAAAd/rick-roll-rick-ashley.gif"
 # For debugging 
 logger = logging.getLogger('testlogger')
 
+
 @csrf_exempt
 def index(request):
     try:
@@ -30,7 +31,7 @@ def index(request):
 
         ##bot_welcome = "HIIIIII"
         ##bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
-        bot.send_photo(chat_id, PHOTO, caption='LMAOOOO')
+        bot.send_animation(chat_id, PHOTO, caption='LMAOOOO')
 
         logger.info("Successfully turned into sent object")
     except Exception as e:
