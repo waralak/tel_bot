@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 # Create your views here.
 import telegram
 import os
@@ -7,14 +6,13 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 
-bot = telegram.Bot(token=os.environ.get("TOKEN", ""))
+TOKEN = os.environ.get("TOKEN", "")
+bot = telegram.Bot(token=TOKEN)
+# For debugging 
 logger = logging.getLogger('testlogger')
 
 @csrf_exempt
 def index(request):
-    if request.method == "GET":
-        return HttpResponse("")
-    
     try:
         js = request.read().decode()
         logger.info('\n{}\n'.format(js))
@@ -34,4 +32,29 @@ def index(request):
         logger.info("Successfully turned into sent object")
     except Exception as e:
         logger.info("\n{}\n".format(e))
+
+    return HttpResponse("")
+
+@csrf_exempt
+def set_webhook(request):
+    if not request.method == "POST":
+        raise Http404("")
+
+    try:
+        password = request.POST.get("password", "")
+
+        if not password:
+            raise Http404("")
+
+        if password != os.environ.get("SECRET_PASSWORD", "default"):
+            raise Http404("")
+
+        bot.delete_webhook()
+        bot.set_webhook(
+            url="https://telboting.herokuapp.com/{}/".format(TOKEN)
+        )
+
+    except Exception as e:
+        logger.info("\n{}\n".format(e))
+
     return HttpResponse("")
