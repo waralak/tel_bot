@@ -30,7 +30,7 @@ def index(request):
 
         ##bot_welcome = "HIIIIII"
         ##bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
-        bot.send_photo(chat_id, PHOTO, caption="LMAOOOO")
+        bot.send_photo(chat_id, PHOTO, caption='<span style="color:red;">LMAOOOO</span>', parse_mode="HTML")
 
         logger.info("Successfully turned into sent object")
     except Exception as e:
